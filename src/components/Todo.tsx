@@ -3,16 +3,22 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 type TaskProps = {
-  id: any
+  id: string
   task: string;
   completed: boolean;
   isEditing: boolean;
+  toggleComplete: (id: string) => void
 }
 
-const Todo = ({ task }: TaskProps) => {
+const Todo = ({ task, completed, toggleComplete, id }: TaskProps) => {
   return (
     <div className="flex flex-row bg-purple-600 w-full py-4 justify-between px-4 mb-4 text-white">
-      <p>{task}</p>
+      <p
+        onClick={() => toggleComplete(id)}
+        className={`cursor-pointer ${completed ? 'text-purple-300 line-through' : ''}`}
+      >
+        {task}
+      </p>
       <div className='flex'>
         <FontAwesomeIcon className='pr-4 cursor-pointer' icon={faPenToSquare} />
         <FontAwesomeIcon className='cursor-pointer' icon={faTrash} />

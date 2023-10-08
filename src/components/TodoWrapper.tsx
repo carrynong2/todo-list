@@ -5,7 +5,7 @@ import Todo from "./Todo";
 uuidv4();
 
 type Todo = {
-  id: any
+  id: string
   task: string;
   completed: boolean;
   isEditing: boolean;
@@ -19,12 +19,20 @@ const TodoWrapper = () => {
     setTodos([...todos, newTodo]);
   };
 
+  const toggleComplete = (id: string) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  }
+
   return (
     <div className="mt-20 p-10 rounded-md bg-slate-600">
       <h1 className="text-center text-white font-bold text-3xl">Get Things Done!</h1>
       <TodoForm addTodo={addTodo} />
       {todos.map((todo, index) => {
-        return <Todo {...todo} key={index} />
+        return <Todo {...todo} key={index} toggleComplete={toggleComplete} />
       })}
     </div>
   );
