@@ -8,9 +8,11 @@ type TaskProps = {
   completed: boolean;
   isEditing: boolean;
   toggleComplete: (id: string) => void
+  deleteTodo: (id: string) => void
+  editTodo: (id: string) => void
 }
 
-const Todo = ({ task, completed, toggleComplete, id }: TaskProps) => {
+const Todo = ({ task, completed, toggleComplete, id, deleteTodo, editTodo }: TaskProps) => {
   return (
     <div className="flex flex-row bg-purple-600 w-full py-4 justify-between px-4 mb-4 text-white">
       <p
@@ -20,8 +22,8 @@ const Todo = ({ task, completed, toggleComplete, id }: TaskProps) => {
         {task}
       </p>
       <div className='flex'>
-        <FontAwesomeIcon className='pr-4 cursor-pointer' icon={faPenToSquare} />
-        <FontAwesomeIcon className='cursor-pointer' icon={faTrash} />
+        <FontAwesomeIcon className='pr-4 cursor-pointer' icon={faPenToSquare} onClick={() => editTodo(id)} />
+        <FontAwesomeIcon className='cursor-pointer' icon={faTrash} onClick={() => deleteTodo(id)} />
       </div>
     </div>
   )
